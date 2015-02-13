@@ -1,0 +1,32 @@
+{% extends "nblayout.html" %}
+{% block notices %}
+<div class="col-md-8 column scrolldiv" >
+  {% for notice in notices %}
+			<div class="panel panel-default post">
+				<div class="panel-heading ">
+          <p class="description">{{ notice.description }}</p>
+				</div>
+        	{% if notice.postername %}
+				<div class="panel-body">
+				<img src='/uploads/poster/{{notice.postername}}' class='img-responsive' />
+				</div>
+        {% endif%}
+        {% if notice.docname %}
+				<div class="panel-footer">
+          Attachment:<a href='/uploads/docs/{{notice.docname}}'>{{notice.docname}}</a>
+				</div>
+        {% endif %}
+
+			</div>
+
+  {% else %}
+  <p>End of notices !</p>
+
+  {% endfor %}
+ <a href="/{{page_num}}" class="nexturl" ></a>
+		</div>
+{% endblock %}
+{% block adminnotices %}
+<div class="col-md-4 column">
+		</div>
+{% endblock %}

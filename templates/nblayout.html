@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SVNIT E-Notice Board</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+	<!--link rel="stylesheet/less" href="{{ url_for('static',filename='less/bootstrap.less')}}" type="text/css" /-->
+	<!--link rel="stylesheet/less" href="{{ url_for('static',filename='less/responsive.less')}}" type="text/css" /-->
+	<!--script src="{{ url_for('static',filename='js/less-1.3.3.min.js')}}"></script-->
+	<!--append ‘#!watch’ to the browser URL, then refresh the page. -->
+
+	<link href="{{ url_for('static',filename='css/bootstrap.min.css')}}" rel="stylesheet">
+	<link href="{{ url_for('static',filename='css/style.css')}}" rel="stylesheet">
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="{{ url_for('static',filename='js/html5shiv.js')}}"></script>
+  <![endif]-->
+
+
+
+	<script type="text/javascript" src="{{ url_for('static',filename='js/jquery.min.js')}}"></script>
+
+	<script type="text/javascript" src="{{ url_for('static',filename='js/bootstrap.min.js')}}"></script>
+	<script type="text/javascript" src="{{ url_for('static',filename='js/scripts.js')}}"></script>
+	<script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+
+<body>
+
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column" style="margin-top:1em;">
+			<ul class="nav nav-pills">
+				<li >
+					<a href="/">Home</a>
+				</li>
+
+				<li class="navbar-right">
+				<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal">
+ Add Notice
+</button>
+
+				</li>
+
+			</ul>
+		</div>
+	</div>
+
+	<div class="row clearfix" style="margin-top:1em;">
+    {% block notices %}{% endblock %}{% block adminnotices %}{% endblock %}
+
+
+	</div>
+</div>
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add Notice</h4>
+      </div>
+      <div class="modal-body">
+        <p class="alert alert-warning">Your Notice will be visible only after approval by admin</p>
+         <form action="/add" method=post enctype=multipart/form-data>
+           <div class="form-group"><label>Description</label><textarea class="form-control" id="description" max_length=1000 name="description" placeholder="Description..."></textarea>
+
+           </div>
+           <div id="characterLeft"></div>
+           <div class="form-group"><label>Poster</label><input type="file" name="poster" placeholder="Poster" accept="image/*">
+           <p class="help-block">Allowed extensions:'png', 'jpg', 'jpeg', 'gif','PNG'</p>
+           </div>
+           <div class="form-group"><label>Attachment</label><input type="file" name="document" placeholder="Attachment" accept=".pdf,.txt,.doc,.docx">
+           <p class="help-block">Allowed extensions: 'txt','pdf','doc','docx'</p>
+           </div>
+<div class="g-recaptcha form-group" data-sitekey="6LdV9AATAAAAADrgRr_r8N04Ek0FA6Hx6eYIIDrE"></div>
+           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>
